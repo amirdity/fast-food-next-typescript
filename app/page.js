@@ -1,14 +1,25 @@
+import MainHeader from "@/components/main-header/main-header";
 import Link from "next/link";
-
+import classees from "./page.module.css";
 export default function Home() {
   return (
-    <main>
-      <h1 style={{ color: 'white', textAlign: 'center' }}>
-        Time to get started!
-      </h1>
-      <p><Link href="/meals">Meals</Link> </p>
-      <p><Link href="/meals/share">share Meal</Link> </p>
-      <p><Link href="/community">community</Link> </p>
-    </main>
+    <>
+      <header className={classees.header}>
+        <div className={classees.slideshow}></div>
+        <div>
+          <div className={classees.hero}>
+            <h1>NextLevel Food for NextLevel Foodies</h1>
+            <p>Taste & share food from all over the world.</p>
+          </div>
+          <div className={classees.cta}>
+            <Link href="/community">join the community</Link>
+            <Link href="/meals">Explore Meals</Link>
+          </div>
+        </div>
+      </header>
+      <main>
+        
+      </main>
+    </>
   );
 }
