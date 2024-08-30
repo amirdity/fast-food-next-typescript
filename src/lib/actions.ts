@@ -1,4 +1,8 @@
 "use server";
+
+import { redirect } from "next/navigation";
+import { saveMeal } from "./meals";
+
 export async function shareMeal(formData: { get: (arg0: string) => any }) {
 
   const meal = {
@@ -9,6 +13,9 @@ export async function shareMeal(formData: { get: (arg0: string) => any }) {
     creator: formData.get("name"),
     creator_email: formData.get("email"),
   };
-
-  console.log(meal);
+  if (meal.title || meal.title.trim() === "") {
+    throw new Error("Title is required");
+  }
+  // await saveMeal(meal)
+  redirect("/meals")
 }
