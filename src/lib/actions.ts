@@ -2,9 +2,9 @@
 
 import { redirect } from "next/navigation";
 import { saveMeal } from "./meals";
+import { revalidatePath } from "next/cache";
 
-export async function shareMeal(formData: { get: (arg0: string) => any }) {
-
+export async function shareMeal(prevState: any ,formData: { get: (arg0: string) => any }) {
   const meal = {
     title: formData.get("title"),
     summary: formData.get("summary"),
@@ -14,8 +14,11 @@ export async function shareMeal(formData: { get: (arg0: string) => any }) {
     creator_email: formData.get("email"),
   };
   if (meal.title || meal.title.trim() === "") {
-    throw new Error("Title is required");
+    return {
+      message:"invalid input"
+    }
   }
   // await saveMeal(meal)
-  redirect("/meals")
+  revalidatePath("/meals");
+  redirect("/meals");
 }

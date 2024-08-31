@@ -12,6 +12,16 @@ type Meal = {
   creator_email: string;
   instructions: string;
 }
+export async function generateMetadata({ params }: { params: { mealSlug: string } }) {
+  const meal = getMeal(params.mealSlug) as Meal;
+  if (!meal) {
+    notFound();
+  }
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
 export default function MealDetailsPage({params}:{params:{mealSlug:string}}) {
   const meal = getMeal(params.mealSlug) as Meal;
   if (!meal) {
